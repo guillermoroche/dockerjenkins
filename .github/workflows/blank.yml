@@ -14,11 +14,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jmeter
-          
-      - name: Update JMeter Properties
-        run: |
-          echo "security.manager=disable" >> /usr/share/jmeter/bin/jmeter.properties
 
-      - name: Run JMeter Tests
+      - name: Copy and Modify JMeter Properties
         run: |
-          jmeter -n -t simple.jmx -l result.jtl
+          cp /usr/share/jmeter/bin/jmeter.properties $GITHUB_WORKSPACE/jmeter.properties
+          echo "security.manager=disable" >> $GITHUB_WORKSPACE/jmeter.properties
+
+      - name: Run JMeter Tests with Custom Properties
+        run: |
+          jmeter -n -t simple.jmx -l result.jtl -p $GITHUB_WORKSPACE/jmeter.properties
