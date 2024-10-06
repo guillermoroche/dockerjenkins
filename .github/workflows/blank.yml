@@ -14,6 +14,6 @@ jobs:
         run: |
           sudo apt-get install -y jmeter
 
-      # - name: Run JMeter Tests
-      #   run: |
-      #     jmeter -n -t path/to/your_test_plan.jmx -l result.jtl
+      - name: Run JMeter Tests
+        run: |
+         jmeter -n -t simple.jmx -l result.jtl
