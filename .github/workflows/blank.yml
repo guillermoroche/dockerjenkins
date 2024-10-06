@@ -19,6 +19,7 @@ jobs:
         run: |
           cp /usr/share/jmeter/bin/jmeter.properties $GITHUB_WORKSPACE/jmeter.properties
           echo "security.manager=disable" >> $GITHUB_WORKSPACE/jmeter.properties
+          echo "class.whitelist=org.apache.jmeter.save.ScriptWrapper" >> $GITHUB_WORKSPACE/jmeter.properties
 
       - name: Run JMeter Tests with Custom Properties
         run: |
