@@ -1,22 +1,20 @@
-name: Run Postman tests with Newman
+name: Run JMeter Tests
 
-on: [push, pull_request]  # Ejecuta los tests cuando haya un push o pull request
+on: [push, pull_request]
 
 jobs:
-  test:
+  run-jmeter:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Install Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'  # Elige la versión de Node.js que prefieras
+      - name: Install JMeter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jmeter
 
-      - name: Install Newman
-        run: npm install -g newman  # Instala Newman globalmente
-
-      - name: Run Postman collection
-        run: newman --version  # Reemplaza con la ruta a tu colección exportada
+      # - name: Run JMeter Tests
+      #   run: |
+      #     jmeter -n -t path/to/your_test_plan.jmx -l result.jtl
