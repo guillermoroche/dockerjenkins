@@ -1,22 +1,22 @@
-name: Node.js CI
+name: Run Postman tests with Newman
 
-on: [push, pull_request]
+on: [push, pull_request]  # Ejecuta los tests cuando haya un push o pull request
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
+      - name: Install Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Especifica la versión de Node.js que deseas utilizar
+          node-version: '14'  # Elige la versión de Node.js que prefieras
 
-      - name: Install dependencies
-        run: npm install  # Comando para instalar las dependencias de tu proyecto
+      - name: Install Newman
+        run: npm install -g newman  # Instala Newman globalmente
 
-      - name: Run your Node.js command
-        run: node your-script.js  # Reemplaza 'your-script.js' con el nombre de tu script
+      - name: Run Postman collection
+        run: newman --version  # Reemplaza con la ruta a tu colección exportada
